@@ -41,6 +41,8 @@ cd rtx5090-stable-diffusion
 ./deploy.sh
 ```
 
+> **Note:** The initial Docker image build may take up to 30–35 minutes depending on your system and internet speed (reference build: ~31 minutes).
+
 ### 2. Access WebUI
 Open your browser to: `http://localhost:7860`
 
@@ -48,6 +50,24 @@ Open your browser to: `http://localhost:7860`
 ```bash
 ./download-models.sh
 ```
+
+## 🖥️ Reference Build Machine Specs
+
+> **CPU:** AMD Ryzen 9 9950X (16 C/32 T, 4.3 – 5.7 GHz, 16 MB L2 + 64 MB L3 cache, 24 × PCIe 5.0 + 4 × PCIe 4.0 lanes)  
+> **GPU:** MSI GeForce RTX 5090 Gaming Trio OC (Blackwell GB202; 21,760 CUDA cores, 680 Tensor cores, 170 RT cores; 2,020 MHz base / 2,480 MHz boost; 32 GB GDDR7 @ 28 Gbps; 1,792 GB/s bandwidth; 16-pin 12V-2×6 power)  
+> **Board:** MSI MAG X870E (AM5, X870E chipset; 4 × DDR5 (up to 256 GB); 1 × PCIe 5.0 ×16, 1 × PCIe 4.0 ×16 (×4 electrical), 1 × PCIe 3.0 ×1; 2 × M.2 PCIe 5.0 ×4 + 2 × M.2 PCIe 4.0 ×4; 6 × SATA 6 Gb/s; RTL8126 1/2.5/5 GbE)  
+> **RAM:** 128 GB G.SKILL Flare X5 DDR5-6000 CL30 (4 × 32 GB, AMD EXPO)  
+> **SSD:** Crucial T705 2 TB Gen5 NVMe (PCIe 5.0 ×4; up to 14,500 MB/s read, 12,700 MB/s write; 1.5 M IOPS)  
+> **PSU:** Corsair HX1500i (ATX 3.1, 1,500 W, 80+ Platinum, Zero-RPM below ~600 W)  
+> **CPU Cooler:** be quiet! Dark Rock Elite (dual 135 mm, 168 mm height, 280 W TDP)  
+> **Case:** Fractal Define 7 XL (E-ATX, 544 × 240 × 467 mm, sound-dampened)  
+> **Case Fans:** 6 × Noctua NF-A14 PWM (140 mm, up to 1,500 RPM, 82.5 CFM, 24.6 dB(A))  
+
+**OS:** Ubuntu 24.04.2 LTS (Noble Numbat) with OEM HWE kernel (5.15-oem)  
+**Docker:** Docker CE (latest), docker-compose v2, NVIDIA Container Toolkit  
+**Build Time:** ~31 minutes, 24 seconds (first build, clean cache)
+
+> *Build times may vary depending on your CPU, disk speed, RAM, and internet connection. Faster CPUs and SSDs will reduce build time.*
 
 ## 📦 What's Included
 
