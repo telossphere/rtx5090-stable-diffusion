@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MODEL_DIR="/home/merlihin/dev/odins-ai/models/stable-diffusion"
+MODEL_DIR="./models/stable-diffusion"
 DOCKER_COMPOSE_FILE="docker/docker-compose.stable-diffusion-rtx5090.yml"
 CONTAINER_NAME="odins-ai-stable-diffusion-rtx5090"
 

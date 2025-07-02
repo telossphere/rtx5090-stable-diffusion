@@ -13,7 +13,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-MODEL_DIR="/opt/ai/models/stable-diffusion"
+MODEL_DIR="./models/stable-diffusion"
 CIVITAI_API="https://civitai.com/api/v1"
 
 # Detect non-interactive mode
@@ -63,7 +63,7 @@ echo
 check_model_dir() {
     if [ ! -d "$MODEL_DIR" ]; then
         echo -e "${RED}❌ Model directory not found: $MODEL_DIR${NC}"
-        echo -e "${YELLOW}Please run the deployment script first: ./deploy-stable-diffusion.sh${NC}"
+        echo -e "${YELLOW}Please run the deployment script first: ./deploy.sh${NC}"
         exit 1
     fi
     echo -e "${GREEN}✅ Model directory found${NC}"
@@ -484,7 +484,7 @@ main() {
     echo -e "\n${GREEN}🎉 Model download complete!${NC}"
     echo -e "${BLUE}Models are now available in: ${GREEN}$MODEL_DIR${NC}"
     echo -e "${YELLOW}Restart the Stable Diffusion container to load new models:${NC}"
-    echo -e "  ${GREEN}docker compose -f docker/docker-compose.stable-diffusion-rtx5090.yml restart${NC}"
+    echo -e "  ${GREEN}docker compose restart${NC}"
 
     show_optimization_tips
     show_manual_instructions

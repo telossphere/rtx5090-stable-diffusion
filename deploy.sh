@@ -415,13 +415,13 @@ show_final_info() {
     echo -e "  • API: ${GREEN}http://localhost:$PORT/docs${NC}"
     echo
     echo -e "${BLUE}📁 Directory Structure:${NC}"
-    echo -e "  • Models: ${GREEN}./models/stable-diffusion/${NC}"
+    echo -e "  • Models: ${GREEN}./models/stable-diffusion/${NC} (host path)"
     echo -e "  • Config: ${GREEN}./config/stable-diffusion/${NC}"
     echo -e "  • Logs: ${GREEN}./logs/stable-diffusion/${NC}"
     echo -e "  • Outputs: ${GREEN}./outputs/${NC}"
     echo
     echo -e "${YELLOW}💡 Next Steps:${NC}"
-    echo -e "  1. Download models: ${GREEN}./download-models.sh${NC}"
+    echo -e "  1. Download models: ${GREEN}./download-models.sh${NC} (run on host)"
     echo -e "  2. Test deployment: ${GREEN}./test.sh${NC}"
     echo -e "  3. Access WebUI: ${GREEN}http://localhost:$PORT${NC}"
     echo
