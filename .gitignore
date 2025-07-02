@@ -38,6 +38,7 @@ test-results/
 coverage/
 
 # Build artifacts
+packages/
 build/
 dist/
 *.tar.gz
