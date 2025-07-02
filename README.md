@@ -48,6 +48,10 @@ Open your browser to: `http://localhost:7860`
 
 ### 3. Download Models (Optional)
 ```bash
+# Interactive model selection (recommended)
+./download-models-interactive.sh
+
+# Or download all models automatically
 ./download-models.sh
 ```
 
@@ -72,10 +76,11 @@ Open your browser to: `http://localhost:7860`
 ## 📦 What's Included
 
 ### Core Components
-- **`docker/Dockerfile.stable-diffusion-rtx5090`** - RTX 5090 optimized base image (used by compose)
+- **`Dockerfile`** - RTX 5090 optimized base image
 - **`docker-compose.yml`** - Production deployment configuration
 - **`deploy.sh`** - One-command deployment script
-- **`download-models.sh`** - Popular model downloader
+- **`download-models.sh`** - Non-interactive model downloader
+- **`download-models-interactive.sh`** - Interactive model selection and downloader
 
 ### Optimizations
 - **CUDA 12.8** with full Blackwell support
@@ -109,10 +114,11 @@ xFormers: 0.0.30+ (compiled with sm_120)
 - **VRAM**: `--medvram` for 32GB optimization
 
 ### Supported Models
-- Stable Diffusion 1.5, 2.1, XL
-- All CivitAI community models
-- Custom fine-tuned models
-- LoRA and Textual Inversion
+- **SDXL Models**: Base 1.0, Turbo (FP16 & Full), Lightning, Refiner
+- **Community Models**: Realistic Vision V5.1, Deliberate v3, DreamShaper v8, RealVisXL V5.0
+- **All CivitAI models** with direct download support
+- **Custom fine-tuned models** and LoRA support
+- **Textual Inversion** embeddings
 
 ## 📊 Performance Benchmarks
 
@@ -134,11 +140,51 @@ xFormers: 0.0.30+ (compiled with sm_120)
 
 *Real-world benchmarks conducted on RTX 5090 with 32GB GDDR7 memory*
 
-## 🔧 Advanced Configuration
+## 📥 Model Downloaders
 
-### Custom Models
+### Interactive Model Downloader (Recommended)
+The interactive downloader provides a user-friendly menu to select specific models:
+
 ```bash
-# Add models to ./models/stable-diffusion/
+./download-models-interactive.sh
+```
+
+**Available Options:**
+- **SDXL Base 1.0** (6.9GB - Foundation model)
+- **SDXL Turbo FP16** (6.9GB - Ultra fast generation)
+- **SDXL Turbo Full** (13.8GB - Full precision)
+- **Realistic Vision V5.1** (4.3GB - Photorealistic)
+- **Deliberate v3** (4.3GB - Artistic style)
+- **DreamShaper v8** (2.1GB - Creative style)
+- **SDXL Lightning** (6.9GB - Ultra fast)
+- **SDXL Refiner** (6.9GB - High quality refinement)
+- **RealVisXL V5.0** (6.9GB - Photorealistic XL)
+- **All SDXL models** (Best for 32GB VRAM)
+- **All models** (Complete collection)
+
+### Non-Interactive Downloader
+Downloads a predefined set of models automatically:
+
+```bash
+./download-models.sh
+```
+
+**Features:**
+- ✅ **Original repository filenames** for consistency
+- ✅ **Direct Hugging Face links** for reliability
+- ✅ **CivitAI API integration** for community models
+- ✅ **Automatic error handling** and retry logic
+- ✅ **Progress tracking** and download verification
+
+## 🔧 Advanced Configuration
+```bash
+# Interactive model selection (recommended)
+./download-models-interactive.sh
+
+# Download specific models
+./download-models.sh
+
+# Add custom models manually
 cp your-model.safetensors ./models/stable-diffusion/
 docker compose restart stable-diffusion
 ```

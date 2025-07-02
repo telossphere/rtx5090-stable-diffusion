@@ -48,7 +48,7 @@ MODEL_COUNT=$(ls -1 ./models/stable-diffusion/*.safetensors 2>/dev/null | wc -l)
 if [ "$MODEL_COUNT" -gt 0 ]; then
     echo -e "${GREEN}✅ Found $MODEL_COUNT model(s)${NC}"
 else
-    echo -e "${YELLOW}⚠️  No models found. Run ./download-models.sh to download models${NC}"
+    echo -e "${YELLOW}⚠️  No models found. Run ./download-models-interactive.sh for interactive selection or ./download-models.sh to download all models${NC}"
 fi
 
 # Test 5: Check resource usage

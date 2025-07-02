@@ -349,7 +349,7 @@ MODEL_COUNT=$(ls -1 ./models/stable-diffusion/*.safetensors 2>/dev/null | wc -l)
 if [ "$MODEL_COUNT" -gt 0 ]; then
     echo -e "${GREEN}✅ Found $MODEL_COUNT model(s)${NC}"
 else
-    echo -e "${YELLOW}⚠️  No models found. Run ./download-models.sh to download models${NC}"
+    echo -e "${YELLOW}⚠️  No models found. Run ./download-models-interactive.sh for interactive selection or ./download-models.sh to download all models${NC}"
 fi
 
 # Test 5: Check resource usage
@@ -421,7 +421,7 @@ show_final_info() {
     echo -e "  • Outputs: ${GREEN}./outputs/${NC}"
     echo
     echo -e "${YELLOW}💡 Next Steps:${NC}"
-    echo -e "  1. Download models: ${GREEN}./download-models.sh${NC} (run on host)"
+    echo -e "  1. Download models: ${GREEN}./download-models-interactive.sh${NC} (interactive) or ${GREEN}./download-models.sh${NC} (automatic)"
     echo -e "  2. Test deployment: ${GREEN}./test.sh${NC}"
     echo -e "  3. Access WebUI: ${GREEN}http://localhost:$PORT${NC}"
     echo

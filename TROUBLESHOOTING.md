@@ -114,7 +114,9 @@ docker compose restart stable-diffusion
 # Check model directory
 ls -la ./models/stable-diffusion/
 
-# Download models
+# Download models (interactive selection recommended)
+./download-models-interactive.sh
+# or download all models automatically
 ./download-models.sh
 
 # Check container mount
@@ -128,7 +130,9 @@ file ./models/stable-diffusion/*.safetensors
 
 # Re-download corrupted models
 rm ./models/stable-diffusion/corrupted-model.safetensors
-./download-models.sh
+./download-models-interactive.sh  # Interactive selection
+# or
+./download-models.sh              # Non-interactive download
 ```
 
 #### "NaN errors in generation"
