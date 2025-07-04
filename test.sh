@@ -12,25 +12,25 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-CONTAINER_NAME="stable-diffusion-rtx5090"
-
 echo -e "${BLUE}🧪 Testing RTX 5090 Stable Diffusion deployment...${NC}"
 
 # Test 1: Check if container is running
 echo -e "${BLUE}1️⃣  Checking container status...${NC}"
-if docker ps | grep -q "$CONTAINER_NAME"; then
+if docker ps | grep -q "stable-diffusion-rtx5090"; then
     echo -e "${GREEN}✅ Container is running${NC}"
 else
     echo -e "${RED}❌ Container is not running${NC}"
+    echo -e "${YELLOW}💡 Start the container: docker compose up -d${NC}"
     exit 1
 fi
 
 # Test 2: Check GPU access
 echo -e "${BLUE}2️⃣  Testing GPU access...${NC}"
-if docker exec $CONTAINER_NAME python -c "import torch; print(f'PyTorch {torch.__version__} with CUDA {torch.version.cuda}'); print(f'GPU: {torch.cuda.get_device_name(0)}')" 2>/dev/null; then
+if docker exec stable-diffusion-rtx5090 python -c "import torch; print(f'PyTorch {torch.__version__} with CUDA {torch.version.cuda}'); print(f'GPU: {torch.cuda.get_device_name(0)}')" 2>/dev/null; then
     echo -e "${GREEN}✅ GPU access working${NC}"
 else
     echo -e "${RED}❌ GPU access failed${NC}"
+    echo -e "${YELLOW}💡 Check if NVIDIA Docker runtime is properly configured${NC}"
     exit 1
 fi
 
@@ -54,10 +54,20 @@ fi
 # Test 5: Check resource usage
 echo -e "${BLUE}5️⃣  Checking resource usage...${NC}"
 echo -e "${BLUE}📊 Container stats:${NC}"
-docker stats --no-stream $CONTAINER_NAME
+docker stats --no-stream stable-diffusion-rtx5090
 
 echo -e "${BLUE}📊 GPU usage:${NC}"
 nvidia-smi --query-gpu=name,memory.used,memory.total,utilization.gpu --format=csv,noheader
 
 echo -e "${GREEN}🎉 All tests completed!${NC}"
 echo -e "${BLUE}🌐 Access WebUI at: http://localhost:7860${NC}"
+echo -e "${BLUE}📊 Version: 1.0.2 with cuDNN v9.1 optimization${NC}"
+
+# Troubleshooting section
+echo -e "${BLUE}🔧 Troubleshooting tips:${NC}"
+echo -e "  • If GPU access fails, ensure NVIDIA Docker runtime is installed:"
+echo -e "    ${YELLOW}sudo apt-get install nvidia-docker2${NC}"
+echo -e "    ${YELLOW}sudo systemctl restart docker${NC}"
+echo -e "  • Check GPU availability: ${YELLOW}nvidia-smi${NC}"
+echo -e "  • Verify Docker runtime: ${YELLOW}docker info | grep -i runtime${NC}"
+echo -e "  • Test NVIDIA Docker: ${YELLOW}docker run --rm --gpus all nvidia/cuda:12.8.1-base-ubuntu22.04 nvidia-smi${NC}"
