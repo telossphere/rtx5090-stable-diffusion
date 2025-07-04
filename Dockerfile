@@ -1,5 +1,5 @@
 # ---- Odin AI · Stable-Diffusion WebUI for RTX 5090 (Blackwell) ----
-FROM nvidia/cuda:12.8.0-devel-ubuntu22.04
+FROM nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=America/New_York \
@@ -7,7 +7,13 @@ ENV DEBIAN_FRONTEND=noninteractive \
     CUDA_VISIBLE_DEVICES=0 \
     TORCH_CUDA_ARCH_LIST=12.0 \
     FORCE_CUDA=1 \
-    CUDA_HOME=/usr/local/cuda
+    CUDA_HOME=/usr/local/cuda \
+
+    LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH \
+    TORCH_CUDNN_V8_API_ENABLED=1 \
+    TORCH_CUDNN_V8_API_DISABLED=0 \
+    PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:1024 \
+    TF_FORCE_GPU_ALLOW_GROWTH=true
 
 # --- OS prerequisites --------------------------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
