@@ -16,7 +16,7 @@ echo -e "${BLUE}🧪 Testing RTX 5090 Stable Diffusion deployment...${NC}"
 
 # Test 1: Check if container is running
 echo -e "${BLUE}1️⃣  Checking container status...${NC}"
-if docker ps | grep -q "stable-diffusion"; then
+if docker ps | grep -q "stable-diffusion-rtx5090"; then
     echo -e "${GREEN}✅ Container is running${NC}"
 else
     echo -e "${RED}❌ Container is not running${NC}"
@@ -25,7 +25,7 @@ fi
 
 # Test 2: Check GPU access
 echo -e "${BLUE}2️⃣  Testing GPU access...${NC}"
-if docker exec stable-diffusion python -c "import torch; print(f'PyTorch {torch.__version__} with CUDA {torch.version.cuda}'); print(f'GPU: {torch.cuda.get_device_name(0)}')" 2>/dev/null; then
+if docker exec stable-diffusion-rtx5090 python -c "import torch; print(f'PyTorch {torch.__version__} with CUDA {torch.version.cuda}'); print(f'GPU: {torch.cuda.get_device_name(0)}')" 2>/dev/null; then
     echo -e "${GREEN}✅ GPU access working${NC}"
 else
     echo -e "${RED}❌ GPU access failed${NC}"
@@ -52,7 +52,7 @@ fi
 # Test 5: Check resource usage
 echo -e "${BLUE}5️⃣  Checking resource usage...${NC}"
 echo -e "${BLUE}📊 Container stats:${NC}"
-docker stats --no-stream stable-diffusion
+docker stats --no-stream stable-diffusion-rtx5090
 
 echo -e "${BLUE}📊 GPU usage:${NC}"
 nvidia-smi --query-gpu=name,memory.used,memory.total,utilization.gpu --format=csv,noheader
