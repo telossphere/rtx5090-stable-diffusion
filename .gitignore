@@ -64,3 +64,4 @@ yarn-error.log*
 # Backup files
 *.backup
 *.old
+extensions/

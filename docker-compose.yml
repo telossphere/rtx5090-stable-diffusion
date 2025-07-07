@@ -16,6 +16,7 @@ services:
       - ./config/stable-diffusion:/workspace/webui/config
       - ./logs/stable-diffusion:/workspace/webui/logs
       - ./outputs:/workspace/webui/outputs
+      - ./extensions:/workspace/webui/extensions
     environment:
       - DEBIAN_FRONTEND=noninteractive
       - NVIDIA_VISIBLE_DEVICES=all

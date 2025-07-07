@@ -98,6 +98,7 @@ Open your browser to: `http://localhost:7860`
 - **Automatic error recovery** and restart capabilities
 - **Comprehensive logging** and debugging tools
 - **Model management** scripts
+- **Extension management** with easy add/remove/update tools
 
 ## 🛠️ Technical Details
 
@@ -190,6 +191,8 @@ Downloads a predefined set of models automatically:
 - ✅ **Progress tracking** and download verification
 
 ## 🔧 Advanced Configuration
+
+### Model Management
 ```bash
 # Interactive model selection (recommended)
 ./download-models-interactive.sh
@@ -201,6 +204,51 @@ Downloads a predefined set of models automatically:
 cp your-model.safetensors ./models/stable-diffusion/
 docker compose restart stable-diffusion
 ```
+
+### Extension Management
+```bash
+# Interactive extension management (recommended)
+./manage-extensions.sh
+
+# Command-line extension operations
+./manage-extensions.sh list          # List installed extensions
+./manage-extensions.sh add <url>     # Add extension by URL
+./manage-extensions.sh remove <name> # Remove extension by name
+./manage-extensions.sh update        # Update all extensions
+./manage-extensions.sh info          # Show extension info
+```
+
+#### Pre-installed Extensions
+The following extensions are automatically installed:
+
+**Control & Conditioning:**
+- **ControlNet** - Image-guided generation with pose, depth, canny, and more
+- **OpenPose Editor** - Interactive pose editing and control
+
+**Post-processing:**
+- **ADetailer** - Automatic face and hand detail enhancement
+
+**Prompt Tools:**
+- **Dynamic Prompts** - Wildcards and combinatorial prompt templates
+- **Tag Autocomplete** - CLIP-based autocomplete for prompts
+
+**Large Canvas:**
+- **MultiDiffusion Upscaler** - Tiled generation without VRAM spikes
+
+**Advanced Features:**
+- **AnimateDiff** - Video generation from images
+- **Segment Anything** - AI-powered image segmentation
+- **Inpaint Anything** - Advanced inpainting capabilities
+
+#### Adding Custom Extensions
+1. **Via WebUI**: Go to Extensions → Available → Install from URL
+2. **Via Script**: `./manage-extensions.sh add https://github.com/user/repo.git`
+3. **Manual**: Add the repository URL to `extensions.txt`
+
+#### Extension Compatibility
+- All extensions are tested with the current WebUI version
+- Extensions are automatically updated on container restart
+- Check extension compatibility before installation
 
 ### Environment Variables
 ```bash
@@ -291,7 +339,7 @@ cd rtx5090-stable-diffusion
 ### Planned Features
 - [ ] **Multi-GPU support** for multiple RTX 5090s
 - [ ] **Kubernetes deployment** for scaling
-- [ ] **WebUI extensions** pre-installed
+- [x] **WebUI extensions** pre-installed with management tools
 - [ ] **Model fine-tuning** capabilities
 - [ ] **API rate limiting** and authentication
 - [ ] **Grafana dashboards** for monitoring

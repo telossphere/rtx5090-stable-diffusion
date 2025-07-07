@@ -56,7 +56,14 @@ RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git webui
 WORKDIR /workspace/webui
 RUN python launch.py --skip-install || true
 
+# --- Extension installation setup ---
+COPY --chown=odin:docker extensions.txt /opt/extensions.txt
+COPY --chown=odin:docker install-extensions.sh /usr/local/bin/install-extensions.sh
+RUN chmod +x /usr/local/bin/install-extensions.sh
+
+# --- Entrypoint script ---
+COPY --chown=odin:docker entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 EXPOSE 7860
-CMD ["python","launch.py","--ckpt-dir","/opt/ai/models/stable-diffusion", \
-     "--port","7860","--listen","--api", \
-     "--xformers","--medvram","--opt-split-attention"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
